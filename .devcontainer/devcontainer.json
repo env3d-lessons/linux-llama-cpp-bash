@@ -2,7 +2,7 @@
   "name": "Python Development disable copilot",
   "features": {},
   "postCreateCommand": "bash .devcontainer/install.sh",
-  "postStartCommand": "sudo supervisord -c .devcontainer/llama.conf",
+  "postStartCommand": "supervisord -c .devcontainer/llama.conf",
   // Optional: Uncomment the following line to hard-delete Copilot extension
   // "postAttachCommand": "rm -rf ~/.vscode-remote/extensions/github.copilot* && chmod -w ~/.vscode-remote/extensions && exit",
   "customizations": {
