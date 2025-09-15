@@ -15,7 +15,8 @@
         "python.pythonPath": "/usr/local/bin/python", // Path to Python interpreter
         "extensions.ignoreRecommendations": true,
         "github.copilot.enable": {"*":false}, // Disable GitHub 
-        "github.copilot.enablePanel": false    
+        "github.copilot.enablePanel": false,
+        "codespaces.ports.autoOpenBrowser": false    
       }    
     }
   }
