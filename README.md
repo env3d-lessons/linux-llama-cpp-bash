@@ -13,6 +13,18 @@ objects, where each line represents a token with its value stored in the
 "content" key. By combining all the values of the "content" key from these JSON 
 objects, you can reconstruct the complete response to the input prompt.
 
+```shell
+$ ./query.sh 
+data: {"choices":[{"finish_reason":null,"index":0,"delta":{"role":"assistant","content":null}}],"created":1757973060,"id":"chatcmpl-Q9FZ3pGOdFQLtbXzymVYAVh2UvV0yBU5","model":"qwen2.5-0.5b-instruct","system_fingerprint":"b6479-b907255f","object":"chat.completion.chunk"}
+
+data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":"Data"}}],"created":1757973060,"id":"chatcmpl-Q9FZ3pGOdFQLtbXzymVYAVh2UvV0yBU5","model":"qwen2.5-0.5b-instruct","system_fingerprint":"b6479-b907255f","object":"chat.completion.chunk"}
+
+data: {"choices":[{"finish_reason":null,"index":0,"delta":{"content":" formats"}}],"created":1757973060,"id":"chatcmpl-Q9FZ3pGOdFQLtbXzymVYAVh2UvV0yBU5","model":"qwen2.5-0.5b-instruct","system_fingerprint":"b6479-b907255f","object":"chat.completion.chunk"}
+
+...
+
+```
+
 # Exercise
 
 You're goal is to modify query.sh to achieve the following:
