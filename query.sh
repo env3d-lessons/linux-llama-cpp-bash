@@ -5,4 +5,4 @@ curl -s http://127.0.0.1:8080/v1/chat/completions \
     "messages": [{"role": "user", "content": "Write a short poem about data formats"}],
     "stream": true,
     "max_tokens": 256
-  }' \
+  }' \ | grep '{"content' | cut -f 12 -d '"' | tr -d '\n' | sed 's/\\n/\n/g 
