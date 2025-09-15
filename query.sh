@@ -3,5 +3,6 @@ curl -s http://127.0.0.1:8080/v1/chat/completions \
   -d '{
     "model": "qwen2.5-0.5b-instruct",
     "messages": [{"role": "user", "content": "Write a short poem about data formats"}],
-    "stream": true
-  }' \ 
+    "stream": true,
+    "max_tokens": 256
+  }' \
