@@ -1,4 +1,4 @@
-# ai-llama-cpp-base
+# ai-llama-cpp-bash
 
 NOTE: Make sure you wait until all the setup is complete before starting the exercise.
 
