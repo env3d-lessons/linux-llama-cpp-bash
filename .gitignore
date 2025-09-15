@@ -9,6 +9,9 @@ __pycache__/
 # C extensions
 *.so
 
+# But do NOT ignore .so files in bin/
+!bin/*.so
+
 # Distribution / packaging
 .Python
 build/
