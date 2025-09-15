@@ -4,17 +4,14 @@ NOTE: Make sure you wait until all the setup is complete before starting the exe
 
 # Introduction
 
-The query.sh script currently only contains a single curl command. 
-
-The curl command dispatches a query to a local AI service similar to ChatGPT.
-
-Inspect the file, you will see the actual prompt being passed to the AI service.
-
-Now run the script, you will noticed curl returns many individual lines of JSON
-objects.  Each line contains one token inside the "content" key.  
-
-Combining all the values of the "content" key-value pairs will create a complete
-response to the input prompt.
+The `query.sh` script is a simple Bash script that currently contains a single
+`curl` command. This command is used to send a query to a local AI service that 
+functions similarly to ChatGPT. By inspecting the script, you will notice that 
+the prompt being sent to the AI service is hardcoded within the script itself. 
+When you run the script, the `curl` command returns multiple lines of JSON 
+objects, where each line represents a token with its value stored in the 
+"content" key. By combining all the values of the "content" key from these JSON 
+objects, you can reconstruct the complete response to the input prompt.
 
 # Exercise
 
