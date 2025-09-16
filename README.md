@@ -1,4 +1,4 @@
-# ai-llama-cpp-bash
+# Linux curl with LLM Exercise
 
 NOTE: Make sure you wait until all the setup is complete before starting the exercise.
 
