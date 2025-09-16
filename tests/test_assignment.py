@@ -72,7 +72,3 @@ def test_no_argument(start_mock_server):
     result = subprocess.run(["bash", "./query.sh"], capture_output=True, text=True)  
     r = result.stdout.strip().lower()
     assert 'error' in r
-
-
-if __name__ == '__main__':
-    start_supervisord()
