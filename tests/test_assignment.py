@@ -43,12 +43,12 @@ def start_mock_server():
     thread.join()        
     
 
-def test_Data_in_response(start_mock_server):
+def test_data_in_response(start_mock_server):
     # Run the query.sh script
     result = subprocess.run(["bash", "./query.sh", "test"], capture_output=True, text=True)    
     assert 'Data' in result.stdout.strip()
 
-def test_Format_in_response(start_mock_server):
+def test_format_in_response(start_mock_server):
     # Run the query.sh script
     result = subprocess.run(["bash", "./query.sh", "test"], capture_output=True, text=True)    
     assert 'format' in result.stdout.strip()    
