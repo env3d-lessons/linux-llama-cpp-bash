@@ -7,60 +7,6 @@ import signal
 import time
 import socket
 
-# Find the supervisord process and kill it
-def kill_supervisord():
-    result = subprocess.run(['pgrep', 'supervisord'], capture_output=True, text=True)
-    if result.stdout.strip():
-        pid = int(result.stdout.strip())
-        os.kill(pid, signal.SIGTERM)  # Send SIGTERM to terminate supervisord
-        print(f"Sent SIGTERM to supervisord (PID {pid}). Waiting for it to stop...")
-
-        # Wait for the process to terminate
-        while True:
-            result = subprocess.run(['pgrep', 'supervisord'], capture_output=True, text=True)
-            if not result.stdout.strip():  # If no PID is found, the process has stopped
-                print("Supervisord has stopped.")
-                break
-            time.sleep(0.5)  # Wait for 500ms before checking again
-    else:
-        print("Supervisord is not running.")
-
-def wait_for_port(port, host="127.0.0.1", timeout=5):
-    """Wait until the specified port is available."""
-    start_time = time.time()
-    while time.time() - start_time < timeout:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-            sock.settimeout(1)
-            if sock.connect_ex((host, port)) != 0:  # Port is not in use
-                return True
-        time.sleep(0.5)
-    return False
-
-def start_supervisord():
-    # Wait for port 8080 to become available
-    if not wait_for_port(8080):
-        print("Port 8080 is still in use. Cannot start supervisord.")
-        return
-
-    # Start supervisord as a background process
-    subprocess.Popen(
-        ['supervisord', '-c', '.devcontainer/llama.conf'],
-        stdout=subprocess.DEVNULL,  # Suppress output
-        stderr=subprocess.DEVNULL,  # Suppress error output
-        preexec_fn=os.setpgrp  # Start the process in a new process group
-    )
-    print("Starting supervisord...")
-
-    # Wait for supervisord to start
-    for _ in range(10):  # Retry for up to 5 seconds (10 * 0.5s)
-        result = subprocess.run(['pgrep', 'supervisord'], capture_output=True, text=True)
-        if result.stdout.strip():  # If a PID is found, supervisord is running
-            print("Supervisord is running.")
-            return
-        time.sleep(0.5)  # Wait for 500ms before checking again
-
-    print("Failed to start supervisord within the timeout.")
-
 # Define a mock HTTP server
 class MockServerRequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
@@ -76,21 +22,25 @@ class MockServerRequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(response.encode("utf-8"))
 
 @pytest.fixture(scope="module")
-def start_mock_server():
-
-    kill_supervisord()
+def start_mock_server():    
 
     # Start the mock server in a separate thread
-    server = HTTPServer(("127.0.0.1", 8080), MockServerRequestHandler)
+    
+    # Change port 8080 to 8081 in query.sh
+    subprocess.run(["sed", "-i", "s/:8080/:8081/g", "query.sh"], check=True)
+
+    # Start the mock server in a separate thread on 8081
+    server = HTTPServer(("127.0.0.1", 8081), MockServerRequestHandler)
     thread = threading.Thread(target=server.serve_forever)
     thread.daemon = True
     thread.start()
     yield
     server.shutdown()
-    start_supervisord()
-    thread.join()
-    
-    
+
+    # Restore query.sh to use 8080
+    subprocess.run(["sed", "-i", "s/:8081/:8080/g", "query.sh"], check=True)
+
+    thread.join()        
     
 
 def test_Data_in_response(start_mock_server):
