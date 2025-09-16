@@ -26,7 +26,7 @@ def start_mock_server():
     # Start the mock server in a separate thread
     
     # Change port 8080 to 8081 in query.sh
-    subprocess.run(["sed", "-i", "s/:8080/:8081/g", "query.sh"], check=True)
+    #subprocess.run(["sed", "-i", "s/:8080/:8081/g", "query.sh"], check=True)
 
     # Start the mock server in a separate thread on 8081
     server = HTTPServer(("127.0.0.1", 8081), MockServerRequestHandler)
@@ -37,7 +37,7 @@ def start_mock_server():
     server.shutdown()
 
     # Restore query.sh to use 8080
-    subprocess.run(["sed", "-i", "s/:8081/:8080/g", "query.sh"], check=True)
+    #subprocess.run(["sed", "-i", "s/:8081/:8080/g", "query.sh"], check=True)
 
     thread.join()        
 
