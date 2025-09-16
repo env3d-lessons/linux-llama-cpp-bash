@@ -1,0 +1,40 @@
+#!/bin/bash
+# filepath: /workspaces/linux-llama-cpp-bash/tests/mock_curl.sh
+
+# Initialize an empty variable to store the data from the -d switch
+DATA=""
+
+# Parse arguments and handle the -d switch
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -d)
+            # If -d is found, store the next argument as DATA
+            shift
+            DATA="$1"
+            ;;
+        *)
+            # Ignore all other switches
+            ;;
+    esac
+    shift
+done
+
+# Check if DATA is provided
+if [ -z "$DATA" ]; then
+  echo "Error: Missing data (-d)"
+  echo "Usage: $0 -d <string>"
+  exit 1
+fi
+
+# echo $DATA
+# Extract the `messages[0].content` field from the JSON string using jq
+CONTENT=$(echo "$DATA" | jq -r '.messages[0].content')
+
+# Split the CONTENT string into words and print each word on a new line
+TOKENS=$(echo "$CONTENT" | tr ' ' '\n')
+
+for TOKEN in $TOKENS
+do
+    echo "data: {\"choices\":[{\"finish_reason\":null,\"index\":0,\"delta\":{\"content\":\" ${TOKEN}\"}}],\"created\":1757973060,\"id\":\"chatcmpl-Q9FZ3pGOdFQLtbXzymVYAVh2UvV0yBU5\",\"model\":\"qwen2.5-0.5b-instruct\",\"system_fingerprint\":\"b6479-b907255f\",\"object\":\"chat.completion.chunk\"}"
+    echo
+done
