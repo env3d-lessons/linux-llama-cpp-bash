@@ -1,8 +1,10 @@
 # Linux curl with LLM Exercise
 
-NOTE: Make sure you wait until all the setup is complete before starting the exercise.
+Pre-reading: Learn about how to pass arguments to a bash script https://linuxhandbook.com/courses/bash-beginner/bash-arguments/
 
 # Introduction
+
+NOTE: Make sure you wait until all the setup is complete before starting the exercise.
 
 The `query.sh` script is a simple Bash script that currently contains a single
 `curl` command. This command is used to send a query to a local AI service that 
