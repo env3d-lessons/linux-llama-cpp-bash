@@ -71,3 +71,12 @@ $ ./query.sh
 Error: must call with prompt as argument
 Usage: ./query.sh <prompt>
 ```
+# Hand-in
+
+Make sure you run `pytest` to check your score.
+
+Once you are satisified with your score, run the following commands to submit your assignment:
+
+1. `git add -A`
+2. `git commit -a -m 'submit'`
+3. `git push`
