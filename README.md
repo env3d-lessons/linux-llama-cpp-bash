@@ -2,6 +2,8 @@
 
 Pre-reading: Learn about how to pass arguments to a bash script https://linuxhandbook.com/courses/bash-beginner/bash-arguments/
 
+NOTE: Work on this assignment directly within the GitHub Codespaces environment, DO NOT login to the class linux server!
+
 # Introduction
 
 NOTE: Make sure you wait until all the setup is complete before starting the exercise.
